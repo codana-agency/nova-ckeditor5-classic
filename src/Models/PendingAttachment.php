@@ -46,14 +46,6 @@ class PendingAttachment extends Model
      */
     public function persist(CKEditor5Classic $field, $model)
     {
-        config('ckeditor5Classic.attachment_model')::create([
-            'attachable_type' => get_class($model),
-            'attachable_id' => $model->getKey(),
-            'attachment' => $this->attachment,
-            'disk' => $field->disk,
-            'url' => Storage::disk($field->disk)->url($this->attachment),
-        ]);
-
         $this->delete();
     }
 
@@ -65,7 +57,7 @@ class PendingAttachment extends Model
      */
     public function purge()
     {
-        Storage::disk($this->disk)->delete($this->attachment);
+        Storage::disk('public')->delete($this->attachment);
 
         $this->delete();
     }

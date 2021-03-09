@@ -15,18 +15,12 @@ class UploadController extends Controller
      */
     public function store(NovaRequest $request)
     {
-        $field = $request->newResource()
-            ->availableFields($request)
-            ->findFieldByAttribute($request->field, function () {
-                abort(404);
-            });
+        $field = new CKEditor5Classic('content');
+        $field->disk('public');
 
         return response()->json([
             'uploaded' => true,
-            'url' => call_user_func(
-                $field->attachCallback,
-                $request
-            )
+            'url' => (new StorePendingAttachment($field))($request),
         ]);
     }
 
