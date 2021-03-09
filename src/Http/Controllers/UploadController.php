@@ -5,6 +5,9 @@ namespace NumaxLab\NovaCKEditor5Classic\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+use NumaxLab\NovaCKEditor5Classic\CKEditor5Classic;
+use NumaxLab\NovaCKEditor5Classic\Handlers\StorePendingAttachment;
+
 class UploadController extends Controller
 {
     /**
